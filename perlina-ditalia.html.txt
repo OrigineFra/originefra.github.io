@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perlina D'Italia - Pecorino Terre di Chieti IGT</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      max-width: 720px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    .waste-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .waste-icon {
+      width: 40px;
+      height: 40px;
+    }
+    .waste-text {
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+    }
+    .waste-text strong {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .ingredients-title,
+    .nutrition-title {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .ingredients-text,
+    .nutrition-text {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .nutrition-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      border: 1px solid #E0BD59;
+    }
+    .nutrition-table th,
+    .nutrition-table td {
+      padding: 10px;
+      border-top: 1px solid #E0BD59;
+      text-align: left;
+    }
+    .nutrition-table th {
+      background-color: #f9f9f9;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Perlina D'Italia - Pecorino Terre di Chieti IGT</h1>
+  <img src="path/to/image.jpg" alt="Perlina D'Italia - Pecorino Terre di Chieti IGT" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+
+  <h2>Entsorgungsinformationen</h2>
+  <div class="waste-row">
+    <img src="https://cdn-icons-png.flaticon.com/512/684/684611.png" alt="Flasche" class="waste-icon">
+    <div class="waste-text"><strong>Flasche</strong><span>Farbloses Glas</span><span>Durchsichtiges Glas/farblos GL70</span></div>
+  </div>
+  <div class="waste-row">
+    <img src="https://cdn-icons-png.flaticon.com/512/11408/11408128.png" alt="Kapsel" class="waste-icon">
+    <div class="waste-text"><strong>Kapsel</strong><span>Leichtverpackungen (Gelber Sack)</span><span>Aluminium/Plastik, Vorherrschaft von Aluminium C/ALU90</span></div>
+  </div>
+  <div class="waste-row">
+    <img src="https://cdn-icons-png.flaticon.com/512/2372/2372354.png" alt="Verschluss" class="waste-icon">
+    <div class="waste-text"><strong>Verschluss</strong><span>Leichtverpackungen (Gelber Sack)</span><span>Polyethylen niedriger Dichte LDPE4</span></div>
+  </div>
+
+  <h2>Zutaten 2024</h2>
+  <div class="ingredients-title">Zutatenliste</div>
+  <div class="ingredients-text">
+    Bio-Trauben, Säureregulator (Zitronensäure), Antioxidationsmittel (L-Ascorbinsäure), Konservierungsstoff (Sulfite), Stabilisatoren (Metaweinsäure, Zitronensäure), Unter Schutzatmosphäre abgefüllt, Hefen, Konzentrierter Traubenmost / Biologischer rektifizierter konzentrierter Traubenmost
+  </div>
+
+  <h2>Nährwertinformationen</h2>
+  <table class="nutrition-table">
+    <thead>
+      <tr>
+        <th>Durchschnittliche Nährwerte</th>
+        <th>Wert pro 100 ml</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Energie (kJ/kcal)</td><td>321 kJ / 77 kcal</td></tr>
+      <tr><td>Fett</td><td>0 g</td></tr>
+      <tr><td>davon gesättigte Fettsäuren</td><td>0 g</td></tr>
+      <tr><td>Kohlenhydrate</td><td>1 g</td></tr>
+      <tr><td>davon Zucker</td><td>0.2 g</td></tr>
+      <tr><td>Eiweiß</td><td>&lt;0.10 g</td></tr>
+      <tr><td>Salz</td><td>&lt;0.05 g</td></tr>
+      <tr><td>Alkoholgehalt</td><td>13,5 %</td></tr>
+      <tr><td>enthält Sulfite</td><td></td></tr>
+    </tbody>
+  </table>
+</body>
+</html>
