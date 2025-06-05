@@ -61,48 +61,364 @@
   </style>
 </head>
 <body>
-  <h1>Perlina D'Italia - Pecorino Terre di Chieti IGT</h1>
+  <select id="country-select">
+    <option value="de">Deutsch</option>
+    <option value="at">Österreich</option>
+    <option value="ch">Schweiz</option>
+    <option value="fr">Français</option>
+    <option value="it">Italiano</option>
+    <option value="nl">Nederlands</option>
+    <option value="be">Belgique</option>
+    <option value="pl">Polski</option>
+    <option value="uk">English</option>
+    <option value="es">Español</option>
+    <option value="pt">Português</option>
+    <option value="sk">Slovenský</option>
+  </select>
+
+  <h1 id="product-title">Perlina D'Italia - Pecorino Terre di Chieti IGT</h1>
   <img src="path/to/image.jpg" alt="Perlina D'Italia - Pecorino Terre di Chieti IGT" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 
-  <h2>Entsorgungsinformationen</h2>
-  <div class="waste-row">
-    <img src="https://cdn-icons-png.flaticon.com/512/684/684611.png" alt="Flasche" class="waste-icon">
-    <div class="waste-text"><strong>Flasche</strong><span>Farbloses Glas</span><span>Durchsichtiges Glas/farblos GL70</span></div>
-  </div>
-  <div class="waste-row">
-    <img src="https://cdn-icons-png.flaticon.com/512/11408/11408128.png" alt="Kapsel" class="waste-icon">
-    <div class="waste-text"><strong>Kapsel</strong><span>Leichtverpackungen (Gelber Sack)</span><span>Aluminium/Plastik, Vorherrschaft von Aluminium C/ALU90</span></div>
-  </div>
-  <div class="waste-row">
-    <img src="https://cdn-icons-png.flaticon.com/512/2372/2372354.png" alt="Verschluss" class="waste-icon">
-    <div class="waste-text"><strong>Verschluss</strong><span>Leichtverpackungen (Gelber Sack)</span><span>Polyethylen niedriger Dichte LDPE4</span></div>
+  <h2 id="waste-title">Entsorgungsinformationen</h2>
+  <div id="waste-info">
+    <!-- Entsorgungsinformationen werden hier eingefügt -->
   </div>
 
-  <h2>Zutaten 2024</h2>
-  <div class="ingredients-title">Zutatenliste</div>
-  <div class="ingredients-text">
-    Bio-Trauben, Säureregulator (Zitronensäure), Antioxidationsmittel (L-Ascorbinsäure), Konservierungsstoff (Sulfite), Stabilisatoren (Metaweinsäure, Zitronensäure), Unter Schutzatmosphäre abgefüllt, Hefen, Konzentrierter Traubenmost / Biologischer rektifizierter konzentrierter Traubenmost
+  <h2 id="ingredients-title">Zutaten 2024</h2>
+  <div id="ingredients-info">
+    <!-- Zutateninformationen werden hier eingefügt -->
   </div>
 
-  <h2>Nährwertinformationen</h2>
-  <table class="nutrition-table">
-    <thead>
-      <tr>
-        <th>Durchschnittliche Nährwerte</th>
-        <th>Wert pro 100 ml</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Energie (kJ/kcal)</td><td>321 kJ / 77 kcal</td></tr>
-      <tr><td>Fett</td><td>0 g</td></tr>
-      <tr><td>davon gesättigte Fettsäuren</td><td>0 g</td></tr>
-      <tr><td>Kohlenhydrate</td><td>1 g</td></tr>
-      <tr><td>davon Zucker</td><td>0.2 g</td></tr>
-      <tr><td>Eiweiß</td><td>&lt;0.10 g</td></tr>
-      <tr><td>Salz</td><td>&lt;0.05 g</td></tr>
-      <tr><td>Alkoholgehalt</td><td>13,5 %</td></tr>
-      <tr><td>enthält Sulfite</td><td></td></tr>
-    </tbody>
-  </table>
+  <h2 id="nutrition-title">Nährwertinformationen</h2>
+  <div id="nutrition-info">
+    <!-- Nährwertinformationen werden hier eingefügt -->
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const wasteData = {
+        entsorgung_vorschrift_text_json: {
+          "de": "Entsorgungsvorschrift gültig in:",
+          "at": "Entsorgungsvorschrift gültig in:",
+          "ch": "Entsorgungsvorschrift gültig in:",
+          "fr": "Instructions de tri valables en :",
+          "it": "Istruzioni di smaltimento valide in:",
+          "nl": "Afvalinstructies geldig in:",
+          "be": "Afvalinstructies geldig in:",
+          "pl": "Zasady segregacji obowiązujące w:",
+          "uk": "Waste instructions valid in:",
+          "es": "Instrucciones de reciclaje válidas en:",
+          "pt": "Instruções de reciclagem válidas em:",
+          "sk": "Pokyny na recykláciu platné na:"
+        },
+        entsorgung_titel_json: {
+          "de": "Mülltrennung",
+          "at": "Mülltrennung",
+          "ch": "Mülltrennung",
+          "fr": "Tri des déchets",
+          "it": "Smistamento dei rifiuti",
+          "nl": "Afvalscheiding",
+          "be": "Afvalscheiding",
+          "pl": "Segregacja odpadów",
+          "uk": "Waste separation",
+          "es": "Separación de residuos",
+          "pt": "Separação de resíduos",
+          "sk": "Triedenie odpadu"
+        },
+        entsorgung_flasche_json: {
+          "de": ["Flasche", "Farbloses Glas", "Durchsichtiges Glas/farblos GL70"],
+          "at": ["Flasche", "Weißglas", "Durchsichtiges Glas/farblos GL70"],
+          "ch": ["Flasche", "Weißglas", "Durchsichtiges Glas/farblos GL70"],
+          "fr": ["Bouteille", "Verre", "Verre transparent/incolore GL70"],
+          "it": ["Bottiglia", "Cassonetto grigio con coperchio verde - Raccolta vetro", "Vetro trasparente/incolore GL70"],
+          "nl": ["Fles", "Glas", "Transparant/glas helder GL70"],
+          "be": ["Bouteille", "Verre incolore", "Verre transparent/incolore GL70"],
+          "pl": ["Butelka", "Szkło bezbarwne", "Szkło transparentne/bezbarwne GL70"],
+          "uk": ["Bottle", "Glass", "Transparent/colourless glass GL70"],
+          "es": ["Botella", "Vidrio", "Vidrio transparente/incoloro GL70"],
+          "pt": ["Garrafa", "Vidro", "Vidro transparente/incolor GL70"],
+          "sk": ["Fľaša", "Sklo", "Priehľadné/nefarebné sklo GL70"]
+        },
+        enstorgung_kapsel_json: {
+          "de": ["Kapsel", "Leichtverpackungen (Gelber Sack)", "Aluminium/Plastik, Vorherrschaft von Aluminium C/ALU90"],
+          "at": ["Kapsel", "Metallverpackungen", "Aluminium/Plastik, Vorherrschaft von Aluminium C/ALU90"],
+          "ch": ["Kapsel", "Metallverpackungen", "Aluminium/Plastik, Vorherrschaft von Aluminium C/ALU90"],
+          "fr": ["Capsule", "Emballages et papiers", "Aluminium/Plastique, prédominance d'aluminium C/ALU90"],
+          "it": ["Capsula", "Sacco giallo trasparente - Raccolta plastica e metallo", "Alluminio/Plastica, prevalenza alluminio C/ALU90"],
+          "nl": ["Capsule", "Lichte verpakkingen", "Aluminium/Kunststof, overheersend aluminium C/ALU90"],
+          "be": ["Capsule", "Plastiques, métaux et cartons à boissons", "Aluminium/Plastique, prédominance d'aluminium C/ALU90"],
+          "pl": ["Kapsułka", "Lekkie opakowania", "Aluminium/Plastik, przewaga aluminium C/ALU90"],
+          "uk": ["Capsule", "Metals", "Aluminum/Plastic, predominance of aluminum C/ALU90"],
+          "es": ["Cápsula", "Envases ligeros", "Aluminio/Plástico, predominancia de aluminio C/ALU90"],
+          "pt": ["Cápsula", "Embalagens leves", "Alumínio/Plástico, prevalência de alumínio C/ALU90"],
+          "sk": ["Kapsula", "Konzervy", "Hliník/Plast, prevaha hliníka C/ALU90"]
+        },
+        entsorgung_korken_json: {
+          "de": ["Verschluss", "Leichtverpackungen (Gelber Sack)", "Polyethylen niedriger Dichte LDPE4"],
+          "at": ["Verschluss", "Leichtverpackungen", "Polyethylen niedriger Dichte LDPE4"],
+          "ch": ["Verschluss", "Leichtverpackungen", "Polyethylen niedriger Dichte LDPE4"],
+          "fr": ["Bouchon", "Emballages et papiers", "Polyéthylène à basse densité LDPE4"],
+          "it": ["Tappo", "Sacco giallo trasparente - Raccolta plastica e metallo", "Polietilene a bassa densità LDPE4"],
+          "nl": ["Dop", "Lichte verpakkingen", "Lage-dichtheid polyethyleen LDPE4"],
+          "be": ["Bouchon", "Plastiques, métaux et cartons à boissons", "Polyéthylène à basse densité LDPE4"],
+          "pl": ["Korek", "Lekkie opakowania", "Polietylen o niskiej gęstości LDPE4"],
+          "uk": ["Cap", "Plastic", "Low density polyethylene LDPE4"],
+          "es": ["Tapa", "Envases ligeros", "Polietileno de baja densidade LDPE4"],
+          "pt": ["Tampa", "Embalagens leves", "Polietileno de baixa densidade LDPE4"],
+          "sk": ["Uzáver", "Plast", "Nízkohustotný polyetylén LDPE4"]
+        },
+        zutaten_json: {
+          "de": ["Zutaten 2024", "Bio-Trauben, Säureregulator (Zitronensäure), Antioxidationsmittel (L-Ascorbinsäure), Konservierungsstoff (Sulfite), Stabilisatoren (Metaweinsäure, Zitronensäure), Unter Schutzatmosphäre abgefüllt, Hefen, Konzentrierter Traubenmost / Biologischer rektifizierter konzentrierter Traubenmost"],
+          "at": ["Zutaten 2024", "Bio-Trauben, Säureregulator (Zitronensäure), Antioxidationsmittel (L-Ascorbinsäure), Konservierungsstoff (Sulfite), Stabilisatoren (Metaweinsäure, Zitronensäure), Unter Schutzatmosphäre abgefüllt, Hefen, Konzentrierter Traubenmost / Biologischer rektifizierter konzentrierter Traubenmost"],
+          "ch": ["Zutaten 2024", "Bio-Trauben, Säureregulator (Zitronensäure), Antioxidationsmittel (L-Ascorbinsäure), Konservierungsstoff (Sulfite), Stabilisatoren (Metaweinsäure, Zitronensäure), Unter Schutzatmosphäre abgefüllt, Hefen, Konzentrierter Traubenmost / Biologischer rektifizierter konzentrierter Traubenmost"],
+          "fr": ["Ingrédients 2024", "Raisins bio, régulateur d'acidité (acide citrique), antioxydant (acide L-ascorbique), conservateur (sulfites), stabilisants (acide métatartrique, acide citrique), conditionné sous atmosphère protectrice, levures, moût de raisin concentré / moût de raisin concentré rectifié biologique"],
+          "it": ["Ingredienti 2024", "Uva biologica, regolatore di acidità (acido citrico), antiossidante (acido L-ascorbico), conservante (solfiti), stabilizzanti (acido metatartarico, acido citrico), confezionato in atmosfera protettiva, lieviti, mosto d'uva concentrato / mosto d'uva concentrato rettificato biologico"],
+          "nl": ["Ingrediënten 2024", "Biologische druiven, zuurteregelaar (citroenzuur), antioxidant (L-ascorbinezuur), conserveermiddel (sulfieten), stabilisatoren (metawijnsteenzuur, citroenzuur), verpakt onder beschermende atmosfeer, gisten, geconcentreerd druivensap / biologisch gerectificeerd geconcentreerd druivensap"],
+          "be": ["Ingrediënten 2024", "Biologische druiven, zuurteregelaar (citroenzuur), antioxidant (L-ascorbinezuur), conserveermiddel (sulfieten), stabilisatoren (metawijnsteenzuur, citroenzuur), verpakt onder beschermende atmosfeer, gisten, geconcentreerd druivensap / biologisch gerectificeerd geconcentreerd druivensap"],
+          "pl": ["Składniki 2024", "Winogrona ekologiczne, regulator kwasowości (kwas cytrynowy), przeciwutleniacz (kwas L-askorbinowy), konserwant (siarczyny), stabilizatory (kwas metawinianowy, kwas cytrynowy), pakowane w atmosferze ochronnej, drożdże, skoncentrowany moszcz winogronowy / biologiczny rektyfikowany skoncentrowany moszcz winogronowy"],
+          "uk": ["Ingredients 2024", "Organic grapes, acidity regulator (citric acid), antioxidant (L-ascorbic acid), preservative (sulfites), stabilizers (metatartaric acid, citric acid), packed under protective atmosphere, yeasts, concentrated grape must / biologically rectified concentrated grape must"],
+          "es": ["Ingredientes 2024", "Uvas ecológicas, regulador de acidez (ácido cítrico), antioxidante (ácido L-ascórbico), conservante (sulfitos), estabilizantes (ácido metatartárico, ácido cítrico), envasado en atmósfera protectora, levaduras, mosto de uva concentrado / mosto de uva concentrado rectificado biológico"],
+          "pt": ["Ingredientes 2024", "Uvas biológicas, regulador de acidez (ácido cítrico), antioxidante (ácido L-ascórbico), conservante (sulfitos), estabilizadores (ácido metatartárico, ácido cítrico), embalado em atmosfera protetora, leveduras, mosto de uva concentrado / mosto de uva concentrado retificado biológico"],
+          "sk": ["Zloženie 2024", "Bio hrozno, regulátor kyslosti (kyselina citrónová), antioxidant (kyselina L-askorbová), konzervačná látka (siričitany), stabilizátory (kyselina metavínna, kyselina citrónová), balené v ochrannej atmosfére, kvasinky, koncentrovaný hroznový mušt / biologicky rektifikovaný koncentrovaný hroznový mušt"]
+        },
+        naehrwerte_labels_json: {
+          "de": {
+            "title": "Nährwerttabelle",
+            "average_values": "Durchschnittliche Nährwerte",
+            "value_per_100ml": "Wert pro 100 ml",
+            "labels": {
+              "energy": "Energie (kJ/kcal)",
+              "fat": "Fett",
+              "saturated_fat": "davon gesättigte Fettsäuren",
+              "carbs": "Kohlenhydrate",
+              "sugar": "davon Zucker",
+              "protein": "Eiweiß",
+              "salt": "Salz",
+              "alcohol": "Alkoholgehalt"
+            }
+          },
+          "at": {
+            "title": "Nährwerttabelle",
+            "average_values": "Durchschnittliche Nährwerte",
+            "value_per_100ml": "Wert pro 100 ml",
+            "labels": {
+              "energy": "Energie (kJ/kcal)",
+              "fat": "Fett",
+              "saturated_fat": "davon gesättigte Fettsäuren",
+              "carbs": "Kohlenhydrate",
+              "sugar": "davon Zucker",
+              "protein": "Eiweiß",
+              "salt": "Salz",
+              "alcohol": "Alkoholgehalt"
+            }
+          },
+          "ch": {
+            "title": "Nährwerttabelle",
+            "average_values": "Durchschnittliche Nährwerte",
+            "value_per_100ml": "Wert pro 100 ml",
+            "labels": {
+              "energy": "Energie (kJ/kcal)",
+              "fat": "Fett",
+              "saturated_fat": "davon gesättigte Fettsäuren",
+              "carbs": "Kohlenhydrate",
+              "sugar": "davon Zucker",
+              "protein": "Eiweiß",
+              "salt": "Salz",
+              "alcohol": "Alkoholgehalt"
+            }
+          },
+          "fr": {
+            "title": "Tableau nutritionnel",
+            "average_values": "Valeurs nutritionnelles moyennes",
+            "value_per_100ml": "Valeur pour 100 ml",
+            "labels": {
+              "energy": "Énergie (kJ/kcal)",
+              "fat": "Lipides",
+              "saturated_fat": "dont acides gras saturés",
+              "carbs": "Glucides",
+              "sugar": "dont sucres",
+              "protein": "Protéines",
+              "salt": "Sel",
+              "alcohol": "Teneur en alcool"
+            }
+          },
+          "it": {
+            "title": "Tabella nutrizionale",
+            "average_values": "Valori nutrizionali medi",
+            "value_per_100ml": "Valori per 100 ml",
+            "labels": {
+              "energy": "Energia (kJ/kcal)",
+              "fat": "Grassi",
+              "saturated_fat": "di cui acidi grassi saturi",
+              "carbs": "Carboidrati",
+              "sugar": "di cui zuccheri",
+              "protein": "Proteine",
+              "salt": "Sale",
+              "alcohol": "Gradazione alcolica"
+            }
+          },
+          "nl": {
+            "title": "Voedingswaardetabel",
+            "average_values": "Gemiddelde voedingswaarden",
+            "value_per_100ml": "Waarde per 100 ml",
+            "labels": {
+              "energy": "Energie (kJ/kcal)",
+              "fat": "Vet",
+              "saturated_fat": "waarvan verzadigde vetzuren",
+              "carbs": "Koolhydraten",
+              "sugar": "waarvan suikers",
+              "protein": "Eiwit",
+              "salt": "Zout",
+              "alcohol": "Alcoholgehalte"
+            }
+          },
+          "be": {
+            "title": "Voedingswaardetabel",
+            "average_values": "Gemiddelde voedingswaarden",
+            "value_per_100ml": "Waarde per 100 ml",
+            "labels": {
+              "energy": "Energie (kJ/kcal)",
+              "fat": "Vet",
+              "saturated_fat": "waarvan verzadigde vetzuren",
+              "carbs": "Koolhydraten",
+              "sugar": "waarvan suikers",
+              "protein": "Eiwit",
+              "salt": "Zout",
+              "alcohol": "Alcoholgehalte"
+            }
+          },
+          "pl": {
+            "title": "Tabela wartości odżywczych",
+            "average_values": "Średnie wartości odżywcze",
+            "value_per_100ml": "Wartość na 100 ml",
+            "labels": {
+              "energy": "Wartość energetyczna (kJ/kcal)",
+              "fat": "Tłuszcz",
+              "saturated_fat": "w tym kwasy tłuszczowe nasycone",
+              "carbs": "Węglowodany",
+              "sugar": "w tym cukry",
+              "protein": "Białko",
+              "salt": "Sól",
+              "alcohol": "Zawartość alkoholu"
+            }
+          },
+          "uk": {
+            "title": "Nutrition Table",
+            "average_values": "Average Nutritional Values",
+            "value_per_100ml": "Value per 100 ml",
+            "labels": {
+              "energy": "Energy (kJ/kcal)",
+              "fat": "Fat",
+              "saturated_fat": "of which saturates",
+              "carbs": "Carbohydrates",
+              "sugar": "of which sugars",
+              "protein": "Protein",
+              "salt": "Salt",
+              "alcohol": "Alcohol content"
+            }
+          },
+          "es": {
+            "title": "Tabla nutricional",
+            "average_values": "Valores nutricionales medios",
+            "value_per_100ml": "Valor por 100 ml",
+            "labels": {
+              "energy": "Energía (kJ/kcal)",
+              "fat": "Grasa",
+              "saturated_fat": "de las cuales grasas saturadas",
+              "carbs": "Hidratos de carbono",
+              "sugar": "de los cuales azúcares",
+              "protein": "Proteínas",
+              "salt": "Sal",
+              "alcohol": "Contenido alcohólico"
+            }
+          },
+          "pt": {
+            "title": "Tabela nutricional",
+            "average_values": "Valores nutricionais médios",
+            "value_per_100ml": "Valor por 100 ml",
+            "labels": {
+              "energy": "Energia (kJ/kcal)",
+              "fat": "Gordura",
+              "saturated_fat": "dos quais ácidos gordos saturados",
+              "carbs": "Hidratos de carbono",
+              "sugar": "dos quais açúcares",
+              "protein": "Proteínas",
+              "salt": "Sal",
+              "alcohol": "Teor alcoólico"
+            }
+          },
+          "sk": {
+            "title": "Nutričná tabuľka",
+            "average_values": "Priemerné výživové hodnoty",
+            "value_per_100ml": "Hodnota na 100 ml",
+            "labels": {
+              "energy": "Energia (kJ/kcal)",
+              "fat": "Tuky",
+              "saturated_fat": "z toho nasýtené mastné kyseliny",
+              "carbs": "Sacharidy",
+              "sugar": "z toho cukry",
+              "protein": "Bielkoviny",
+              "salt": "Soľ",
+              "alcohol": "Obsah alkoholu"
+            }
+          }
+        }
+      };
+
+      const countrySelect = document.getElementById("country-select");
+
+      countrySelect.addEventListener("change", function() {
+        const lang = countrySelect.value;
+        updateContent(lang);
+      });
+
+      function updateContent(lang) {
+        document.getElementById("waste-title").textContent = wasteData.entsorgung_titel_json[lang];
+        document.getElementById("waste-info").innerHTML = `
+          <div class="waste-row">
+            <img src="https://cdn-icons-png.flaticon.com/512/684/684611.png" alt="Flasche" class="waste-icon">
+            <div class="waste-text"><strong>${wasteData.entsorgung_flasche_json[lang][0]}</strong><span>${wasteData.entsorgung_flasche_json[lang][1]}</span><span>${wasteData.entsorgung_flasche_json[lang][2]}</span></div>
+          </div>
+          <div class="waste-row">
+            <img src="https://cdn-icons-png.flaticon.com/512/11408/11408128.png" alt="Kapsel" class="waste-icon">
+            <div class="waste-text"><strong>${wasteData.enstorgung_kapsel_json[lang][0]}</strong><span>${wasteData.enstorgung_kapsel_json[lang][1]}</span><span>${wasteData.enstorgung_kapsel_json[lang][2]}</span></div>
+          </div>
+          <div class="waste-row">
+            <img src="https://cdn-icons-png.flaticon.com/512/2372/2372354.png" alt="Verschluss" class="waste-icon">
+            <div class="waste-text"><strong>${wasteData.entsorgung_korken_json[lang][0]}</strong><span>${wasteData.entsorgung_korken_json[lang][1]}</span><span>${wasteData.entsorgung_korken_json[lang][2]}</span></div>
+          </div>
+        `;
+
+        document.getElementById("ingredients-title").textContent = wasteData.zutaten_json[lang][0];
+        document.getElementById("ingredients-info").innerHTML = `<div class="ingredients-text">${wasteData.zutaten_json[lang][1]}</div>`;
+
+        const nutritionLabels = wasteData.naehrwerte_labels_json[lang];
+        document.getElementById("nutrition-title").textContent = nutritionLabels.title;
+        document.getElementById("nutrition-info").innerHTML = `
+          <table class="nutrition-table">
+            <thead>
+              <tr>
+                <th>${nutritionLabels.average_values}</th>
+                <th>${nutritionLabels.value_per_100ml}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>${nutritionLabels.labels.energy}</td><td>321 kJ / 77 kcal</td></tr>
+              <tr><td>${nutritionLabels.labels.fat}</td><td>0 g</td></tr>
+              <tr><td>${nutritionLabels.labels.saturated_fat}</td><td>0 g</td></tr>
+              <tr><td>${nutritionLabels.labels.carbs}</td><td>1 g</td></tr>
+              <tr><td>${nutritionLabels.labels.sugar}</td><td>0.2 g</td></tr>
+              <tr><td>${nutritionLabels.labels.protein}</td><td>&lt;0.10 g</td></tr>
+              <tr><td>${nutritionLabels.labels.salt}</td><td>&lt;0.05 g</td></tr>
+              <tr><td>${nutritionLabels.labels.alcohol}</td><td>13,5 %</td></tr>
+            </tbody>
+          </table>
+        `;
+      }
+
+      // Initiale Aktualisierung der Inhalte
+      updateContent(countrySelect.value);
+    });
+  </script>
 </body>
 </html>
