@@ -58,33 +58,60 @@
       background-color: #f9f9f9;
       font-weight: bold;
     }
-    #country-select {
+    .custom-select {
+      position: relative;
+      display: inline-block;
       width: 100%;
+    }
+    .select-selected {
+      background-color: #f9f9f9;
       padding: 10px;
       font-size: 16px;
+      border: 1px solid #ccc;
+      cursor: pointer;
     }
-    #country-select option {
-      background-repeat: no-repeat;
-      background-size: 20px 20px;
-      padding-left: 25px;
+    .select-items {
+      position: absolute;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      z-index: 99;
+      width: 100%;
+      display: none;
+    }
+    .select-items div {
+      padding: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    .select-items div img {
+      margin-right: 10px;
+      width: 20px;
+      height: 20px;
+    }
+    .select-items div:hover {
+      background-color: #ddd;
     }
   </style>
 </head>
 <body>
-  <select id="country-select">
-    <option value="de" data-flag="https://cdn-icons-png.flaticon.com/512/197/197571.png">Deutsch</option>
-    <option value="at" data-flag="https://cdn-icons-png.flaticon.com/512/197/197447.png">Österreich</option>
-    <option value="ch" data-flag="https://cdn-icons-png.flaticon.com/512/197/197540.png">Schweiz</option>
-    <option value="fr" data-flag="https://cdn-icons-png.flaticon.com/512/197/197560.png">Français</option>
-    <option value="it" data-flag="https://cdn-icons-png.flaticon.com/512/197/197626.png">Italiano</option>
-    <option value="nl" data-flag="https://cdn-icons-png.flaticon.com/512/197/197620.png">Nederlands</option>
-    <option value="be" data-flag="https://cdn-icons-png.flaticon.com/512/197/197583.png">Belgique</option>
-    <option value="pl" data-flag="https://cdn-icons-png.flaticon.com/512/197/197529.png">Polski</option>
-    <option value="uk" data-flag="https://cdn-icons-png.flaticon.com/512/197/197374.png">English</option>
-    <option value="es" data-flag="https://cdn-icons-png.flaticon.com/512/197/197593.png">Español</option>
-    <option value="pt" data-flag="https://cdn-icons-png.flaticon.com/512/197/197592.png">Português</option>
-    <option value="sk" data-flag="https://cdn-icons-png.flaticon.com/512/197/197625.png">Slovenský</option>
-  </select>
+  <div class="custom-select">
+    <div class="select-selected">Deutsch</div>
+    <div class="select-items">
+      <div data-lang="de"><img src="https://cdn-icons-png.flaticon.com/512/197/197571.png" alt="Deutsch">Deutsch</div>
+      <div data-lang="at"><img src="https://cdn-icons-png.flaticon.com/512/197/197447.png" alt="Österreich">Österreich</div>
+      <div data-lang="ch"><img src="https://cdn-icons-png.flaticon.com/512/197/197540.png" alt="Schweiz">Schweiz</div>
+      <div data-lang="fr"><img src="https://cdn-icons-png.flaticon.com/512/197/197560.png" alt="Français">Français</div>
+      <div data-lang="it"><img src="https://cdn-icons-png.flaticon.com/512/197/197626.png" alt="Italiano">Italiano</div>
+      <div data-lang="nl"><img src="https://cdn-icons-png.flaticon.com/512/197/197620.png" alt="Nederlands">Nederlands</div>
+      <div data-lang="be"><img src="https://cdn-icons-png.flaticon.com/512/197/197583.png" alt="Belgique">Belgique</div>
+      <div data-lang="pl"><img src="https://cdn-icons-png.flaticon.com/512/197/197529.png" alt="Polski">Polski</div>
+      <div data-lang="uk"><img src="https://cdn-icons-png.flaticon.com/512/197/197374.png" alt="English">English</div>
+      <div data-lang="es"><img src="https://cdn-icons-png.flaticon.com/512/197/197593.png" alt="Español">Español</div>
+      <div data-lang="pt"><img src="https://cdn-icons-png.flaticon.com/512/197/197592.png" alt="Português">Português</div>
+      <div data-lang="sk"><img src="https://cdn-icons-png.flaticon.com/512/197/197625.png" alt="Slovenský">Slovenský</div>
+    </div>
+  </div>
 
   <h1 id="product-title">Luce Di Soave</h1>
   <img src="https://www.originefra.com/cdn/shop/files/luce_di_verona_weisser_hg_large.jpg?v=1742466303" alt="Luce Di Soave" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
@@ -375,17 +402,20 @@
         }
       };
 
-      const countrySelect = document.getElementById("country-select");
-      const options = countrySelect.options;
+      const selectSelected = document.querySelector('.select-selected');
+      const selectItems = document.querySelector('.select-items');
 
-      for (let i = 0; i < options.length; i++) {
-        const flagUrl = options[i].getAttribute('data-flag');
-        options[i].style.backgroundImage = `url(${flagUrl})`;
-      }
+      selectSelected.addEventListener('click', function() {
+        selectItems.style.display = selectItems.style.display === 'block' ? 'none' : 'block';
+      });
 
-      countrySelect.addEventListener("change", function() {
-        const lang = countrySelect.value;
-        updateContent(lang);
+      selectItems.addEventListener('click', function(e) {
+        if (e.target && e.target.matches('div')) {
+          const lang = e.target.getAttribute('data-lang');
+          selectSelected.textContent = e.target.textContent;
+          selectItems.style.display = 'none';
+          updateContent(lang);
+        }
       });
 
       function updateContent(lang) {
@@ -435,7 +465,7 @@
       }
 
       // Initiale Aktualisierung der Inhalte
-      updateContent(countrySelect.value);
+      updateContent('de');
     });
   </script>
 </body>
