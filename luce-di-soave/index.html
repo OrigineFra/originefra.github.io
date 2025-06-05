@@ -58,66 +58,38 @@
       background-color: #f9f9f9;
       font-weight: bold;
     }
-    .custom-select {
-      position: relative;
-      display: inline-block;
-      width: 100%;
-    }
-    .select-selected {
-      background-color: #f9f9f9;
-      padding: 10px;
+    #country-select {
+      padding: 10px 16px;
       font-size: 16px;
-      border: 1px solid #ccc;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
-    .select-selected img {
-      margin-right: 10px;
-      width: 20px;
-      height: 20px;
-    }
-    .select-items {
-      position: absolute;
-      background-color: #f9f9f9;
-      border: 1px solid #ccc;
-      z-index: 99;
+      font-weight: 700;
+      border: 2px solid #E0BD59;
+      border-radius: 8px;
+      background-color: #fffdf8;
+      color: #333;
       width: 100%;
-      display: none;
-    }
-    .select-items div {
-      padding: 10px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
-    .select-items div img {
-      margin-right: 10px;
-      width: 20px;
-      height: 20px;
-    }
-    .select-items div:hover {
-      background-color: #ddd;
+      max-width: 200px;
     }
   </style>
 </head>
 <body>
-  <div class="custom-select">
-    <div class="select-selected"><img src="https://cdn-icons-png.flaticon.com/512/197/197571.png" alt="Deutsch">Deutsch</div>
-    <div class="select-items">
-      <div data-lang="de"><img src="https://cdn-icons-png.flaticon.com/512/197/197571.png" alt="Deutsch">Deutsch</div>
-      <div data-lang="at"><img src="https://cdn-icons-png.flaticon.com/512/197/197447.png" alt="Österreich">Österreich</div>
-      <div data-lang="ch"><img src="https://cdn-icons-png.flaticon.com/512/197/197540.png" alt="Schweiz">Schweiz</div>
-      <div data-lang="fr"><img src="https://cdn-icons-png.flaticon.com/512/197/197560.png" alt="Français">Français</div>
-      <div data-lang="it"><img src="https://cdn-icons-png.flaticon.com/512/197/197626.png" alt="Italiano">Italiano</div>
-      <div data-lang="nl"><img src="https://cdn-icons-png.flaticon.com/512/197/197620.png" alt="Nederlands">Nederlands</div>
-      <div data-lang="be"><img src="https://cdn-icons-png.flaticon.com/512/197/197583.png" alt="Belgique">Belgique</div>
-      <div data-lang="pl"><img src="https://cdn-icons-png.flaticon.com/512/197/197529.png" alt="Polski">Polski</div>
-      <div data-lang="uk"><img src="https://cdn-icons-png.flaticon.com/512/197/197374.png" alt="English">English</div>
-      <div data-lang="es"><img src="https://cdn-icons-png.flaticon.com/512/197/197593.png" alt="Español">Español</div>
-      <div data-lang="pt"><img src="https://cdn-icons-png.flaticon.com/512/197/197575.png" alt="Português">Português</div>
-      <div data-lang="sk"><img src="https://cdn-icons-png.flaticon.com/512/197/197620.png" alt="Slovenský">Slovenský</div>
-    </div>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap;">
+    <label id="label-lang" for="country-select" style="font-size: 18px; font-weight: 700; word-wrap: break-word; overflow-wrap: break-word;">
+      Entsorgungsvorschrift gültig in:
+    </label>
+    <select id="country-select">
+      <option value="de">🇩🇪 Deutschland</option>
+      <option value="at">🇦🇹 Österreich</option>
+      <option value="ch">🇨🇭 Schweiz</option>
+      <option value="fr">🇫🇷 Frankreich</option>
+      <option value="it">🇮🇹 Italien</option>
+      <option value="nl">🇳🇱 Niederlande</option>
+      <option value="be">🇧🇪 Belgien</option>
+      <option value="pl">🇵🇱 Polen</option>
+      <option value="uk">🇬🇧 England</option>
+      <option value="es">🇪🇸 Spanien</option>
+      <option value="pt">🇵🇹 Portugal</option>
+      <option value="sk">🇸🇰 Slowakei</option>
+    </select>
   </div>
 
   <h1 id="product-title">Luce Di Soave</h1>
@@ -409,21 +381,11 @@
         }
       };
 
-      const selectSelected = document.querySelector('.select-selected');
-      const selectItems = document.querySelector('.select-items');
+      const countrySelect = document.getElementById("country-select");
 
-      selectSelected.addEventListener('click', function() {
-        selectItems.style.display = selectItems.style.display === 'block' ? 'none' : 'block';
-      });
-
-      selectItems.addEventListener('click', function(e) {
-        if (e.target && e.target.matches('div')) {
-          const lang = e.target.getAttribute('data-lang');
-          const flagImg = e.target.querySelector('img').src;
-          selectSelected.innerHTML = `<img src="${flagImg}" alt="${e.target.textContent}">${e.target.textContent}`;
-          selectItems.style.display = 'none';
-          updateContent(lang);
-        }
+      countrySelect.addEventListener("change", function() {
+        const lang = countrySelect.value;
+        updateContent(lang);
       });
 
       function updateContent(lang) {
@@ -473,7 +435,7 @@
       }
 
       // Initiale Aktualisierung der Inhalte
-      updateContent('de');
+      updateContent(countrySelect.value);
     });
   </script>
 </body>
