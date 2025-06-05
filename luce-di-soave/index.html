@@ -69,6 +69,13 @@
       font-size: 16px;
       border: 1px solid #ccc;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    .select-selected img {
+      margin-right: 10px;
+      width: 20px;
+      height: 20px;
     }
     .select-items {
       position: absolute;
@@ -96,7 +103,7 @@
 </head>
 <body>
   <div class="custom-select">
-    <div class="select-selected">Deutsch</div>
+    <div class="select-selected"><img src="https://cdn-icons-png.flaticon.com/512/197/197571.png" alt="Deutsch">Deutsch</div>
     <div class="select-items">
       <div data-lang="de"><img src="https://cdn-icons-png.flaticon.com/512/197/197571.png" alt="Deutsch">Deutsch</div>
       <div data-lang="at"><img src="https://cdn-icons-png.flaticon.com/512/197/197447.png" alt="Österreich">Österreich</div>
@@ -108,8 +115,8 @@
       <div data-lang="pl"><img src="https://cdn-icons-png.flaticon.com/512/197/197529.png" alt="Polski">Polski</div>
       <div data-lang="uk"><img src="https://cdn-icons-png.flaticon.com/512/197/197374.png" alt="English">English</div>
       <div data-lang="es"><img src="https://cdn-icons-png.flaticon.com/512/197/197593.png" alt="Español">Español</div>
-      <div data-lang="pt"><img src="https://cdn-icons-png.flaticon.com/512/197/197592.png" alt="Português">Português</div>
-      <div data-lang="sk"><img src="https://cdn-icons-png.flaticon.com/512/197/197625.png" alt="Slovenský">Slovenský</div>
+      <div data-lang="pt"><img src="https://cdn-icons-png.flaticon.com/512/197/197575.png" alt="Português">Português</div>
+      <div data-lang="sk"><img src="https://cdn-icons-png.flaticon.com/512/197/197620.png" alt="Slovenský">Slovenský</div>
     </div>
   </div>
 
@@ -412,7 +419,8 @@
       selectItems.addEventListener('click', function(e) {
         if (e.target && e.target.matches('div')) {
           const lang = e.target.getAttribute('data-lang');
-          selectSelected.textContent = e.target.textContent;
+          const flagImg = e.target.querySelector('img').src;
+          selectSelected.innerHTML = `<img src="${flagImg}" alt="${e.target.textContent}">${e.target.textContent}`;
           selectItems.style.display = 'none';
           updateContent(lang);
         }
