@@ -40,9 +40,6 @@
     .waste-icon {
       width: 40px;
       height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     .waste-text {
       display: flex;
@@ -424,21 +421,15 @@
         document.getElementById("waste-title").textContent = wasteData.entsorgung_titel_json[lang];
         document.getElementById("waste-info").innerHTML = `
           <div class="waste-row">
-            <div class="waste-icon">
-              <img src="https://cdn-icons-png.flaticon.com/512/684/684611.png" alt="Flasche">
-            </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/684/684611.png" alt="Flasche" class="waste-icon">
             <div class="waste-text"><strong>${wasteData.entsorgung_flasche_json[lang][0]}</strong><span>${wasteData.entsorgung_flasche_json[lang][1]}</span><span>${wasteData.entsorgung_flasche_json[lang][2]}</span></div>
           </div>
           <div class="waste-row">
-            <div class="waste-icon">
-              <img src="https://cdn-icons-png.flaticon.com/512/11408/11408128.png" alt="Kapsel">
-            </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/11408/11408128.png" alt="Kapsel" class="waste-icon">
             <div class="waste-text"><strong>${wasteData.enstorgung_kapsel_json[lang][0]}</strong><span>${wasteData.enstorgung_kapsel_json[lang][1]}</span><span>${wasteData.enstorgung_kapsel_json[lang][2]}</span></div>
           </div>
           <div class="waste-row">
-            <div class="waste-icon">
-              <img src="https://cdn-icons-png.flaticon.com/512/2372/2372354.png" alt="Verschluss">
-            </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/2372/2372354.png" alt="Verschluss" class="waste-icon">
             <div class="waste-text"><strong>${wasteData.entsorgung_korken_json[lang][0]}</strong><span>${wasteData.entsorgung_korken_json[lang][1]}</span><span>${wasteData.entsorgung_korken_json[lang][2]}</span></div>
           </div>
         `;
