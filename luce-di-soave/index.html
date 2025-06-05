@@ -58,22 +58,27 @@
       background-color: #f9f9f9;
       font-weight: bold;
     }
+    #country-select option {
+      background-repeat: no-repeat;
+      background-size: 20px 20px;
+      padding-left: 25px;
+    }
   </style>
 </head>
 <body>
   <select id="country-select">
-    <option value="de">Deutsch</option>
-    <option value="at">Österreich</option>
-    <option value="ch">Schweiz</option>
-    <option value="fr">Français</option>
-    <option value="it">Italiano</option>
-    <option value="nl">Nederlands</option>
-    <option value="be">Belgique</option>
-    <option value="pl">Polski</option>
-    <option value="uk">English</option>
-    <option value="es">Español</option>
-    <option value="pt">Português</option>
-    <option value="sk">Slovenský</option>
+    <option value="de" data-flag="https://cdn-icons-png.flaticon.com/512/197/197571.png">Deutsch</option>
+    <option value="at" data-flag="https://cdn-icons-png.flaticon.com/512/197/197447.png">Österreich</option>
+    <option value="ch" data-flag="https://cdn-icons-png.flaticon.com/512/197/197540.png">Schweiz</option>
+    <option value="fr" data-flag="https://cdn-icons-png.flaticon.com/512/197/197560.png">Français</option>
+    <option value="it" data-flag="https://cdn-icons-png.flaticon.com/512/197/197626.png">Italiano</option>
+    <option value="nl" data-flag="https://cdn-icons-png.flaticon.com/512/197/197620.png">Nederlands</option>
+    <option value="be" data-flag="https://cdn-icons-png.flaticon.com/512/197/197583.png">Belgique</option>
+    <option value="pl" data-flag="https://cdn-icons-png.flaticon.com/512/197/197529.png">Polski</option>
+    <option value="uk" data-flag="https://cdn-icons-png.flaticon.com/512/197/197374.png">English</option>
+    <option value="es" data-flag="https://cdn-icons-png.flaticon.com/512/197/197593.png">Español</option>
+    <option value="pt" data-flag="https://cdn-icons-png.flaticon.com/512/197/197592.png">Português</option>
+    <option value="sk" data-flag="https://cdn-icons-png.flaticon.com/512/197/197625.png">Slovenský</option>
   </select>
 
   <h1 id="product-title">Luce Di Soave</h1>
@@ -194,8 +199,7 @@
               "sugar": "davon Zucker",
               "protein": "Eiweiß",
               "salt": "Salz",
-              "alcohol": "Alkoholgehalt",
-              "sulfites": "enthält Sulfite"
+              "alcohol": "Alkoholgehalt"
             }
           },
           "at": {
@@ -210,8 +214,7 @@
               "sugar": "davon Zucker",
               "protein": "Eiweiß",
               "salt": "Salz",
-              "alcohol": "Alkoholgehalt",
-              "sulfites": "enthält Sulfite"
+              "alcohol": "Alkoholgehalt"
             }
           },
           "ch": {
@@ -226,8 +229,7 @@
               "sugar": "davon Zucker",
               "protein": "Eiweiß",
               "salt": "Salz",
-              "alcohol": "Alkoholgehalt",
-              "sulfites": "enthält Sulfite"
+              "alcohol": "Alkoholgehalt"
             }
           },
           "fr": {
@@ -242,8 +244,7 @@
               "sugar": "dont sucres",
               "protein": "Protéines",
               "salt": "Sel",
-              "alcohol": "Teneur en alcool",
-              "sulfites": "contient des sulfites"
+              "alcohol": "Teneur en alcool"
             }
           },
           "it": {
@@ -258,8 +259,7 @@
               "sugar": "di cui zuccheri",
               "protein": "Proteine",
               "salt": "Sale",
-              "alcohol": "Gradazione alcolica",
-              "sulfites": "contiene solfiti"
+              "alcohol": "Gradazione alcolica"
             }
           },
           "nl": {
@@ -274,8 +274,7 @@
               "sugar": "waarvan suikers",
               "protein": "Eiwit",
               "salt": "Zout",
-              "alcohol": "Alcoholgehalte",
-              "sulfites": "bevat sulfieten"
+              "alcohol": "Alcoholgehalte"
             }
           },
           "be": {
@@ -290,8 +289,7 @@
               "sugar": "waarvan suikers",
               "protein": "Eiwit",
               "salt": "Zout",
-              "alcohol": "Alcoholgehalte",
-              "sulfites": "bevat sulfieten"
+              "alcohol": "Alcoholgehalte"
             }
           },
           "pl": {
@@ -306,8 +304,7 @@
               "sugar": "w tym cukry",
               "protein": "Białko",
               "salt": "Sól",
-              "alcohol": "Zawartość alkoholu",
-              "sulfites": "zawiera siarczyny"
+              "alcohol": "Zawartość alkoholu"
             }
           },
           "uk": {
@@ -322,8 +319,7 @@
               "sugar": "of which sugars",
               "protein": "Protein",
               "salt": "Salt",
-              "alcohol": "Alcohol content",
-              "sulfites": "contains sulfites"
+              "alcohol": "Alcohol content"
             }
           },
           "es": {
@@ -338,8 +334,7 @@
               "sugar": "de los cuales azúcares",
               "protein": "Proteínas",
               "salt": "Sal",
-              "alcohol": "Contenido alcohólico",
-              "sulfites": "contiene sulfitos"
+              "alcohol": "Contenido alcohólico"
             }
           },
           "pt": {
@@ -354,8 +349,7 @@
               "sugar": "dos quais açúcares",
               "protein": "Proteínas",
               "salt": "Sal",
-              "alcohol": "Teor alcoólico",
-              "sulfites": "contém sulfitos"
+              "alcohol": "Teor alcoólico"
             }
           },
           "sk": {
@@ -370,14 +364,19 @@
               "sugar": "z toho cukry",
               "protein": "Bielkoviny",
               "salt": "Soľ",
-              "alcohol": "Obsah alkoholu",
-              "sulfites": "obsahuje siričitany"
+              "alcohol": "Obsah alkoholu"
             }
           }
         }
       };
 
       const countrySelect = document.getElementById("country-select");
+      const options = countrySelect.options;
+
+      for (let i = 0; i < options.length; i++) {
+        const flagUrl = options[i].getAttribute('data-flag');
+        options[i].style.backgroundImage = `url(${flagUrl})`;
+      }
 
       countrySelect.addEventListener("change", function() {
         const lang = countrySelect.value;
@@ -402,7 +401,9 @@
         `;
 
         document.getElementById("ingredients-title").textContent = wasteData.zutaten_json[lang][0];
-        document.getElementById("ingredients-info").innerHTML = `<div class="ingredients-text">${wasteData.zutaten_json[lang][1]}</div>`;
+        document.getElementById("ingredients-info").innerHTML = `
+          <div class="ingredients-text">${wasteData.zutaten_json[lang][1]}</div>
+        `;
 
         const nutritionLabels = wasteData.naehrwerte_labels_json[lang];
         document.getElementById("nutrition-title").textContent = nutritionLabels.title;
@@ -423,7 +424,6 @@
               <tr><td>${nutritionLabels.labels.protein}</td><td>1 g</td></tr>
               <tr><td>${nutritionLabels.labels.salt}</td><td>0.5 g</td></tr>
               <tr><td>${nutritionLabels.labels.alcohol}</td><td>12.5 %</td></tr>
-              <tr><td>${nutritionLabels.labels.sulfites}</td><td></td></tr>
             </tbody>
           </table>
         `;
