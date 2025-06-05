@@ -5,12 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Luce Di Soave</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Poppins', sans-serif;
       color: #333;
       max-width: 720px;
       margin: 60px auto;
       padding: 0 20px;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #333;
+      margin: 0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: block;
+      margin: 0 auto 40px;
     }
     .waste-row {
       display: flex;
@@ -26,11 +45,13 @@
       display: flex;
       flex-direction: column;
       font-size: 14px;
+      flex-grow: 1;
     }
     .waste-text strong {
       font-weight: 600;
       margin-bottom: 2px;
     }
+    #waste-title,
     .ingredients-title,
     .nutrition-title {
       font-weight: 700;
@@ -69,9 +90,17 @@
       width: 100%;
       max-width: 200px;
     }
+    hr {
+      border: none;
+      border-top: 2px solid #E0BD59;
+      margin: 30px 0 15px;
+    }
   </style>
 </head>
 <body>
+  <h1 id="product-title">Luce Di Soave</h1>
+  <img src="https://www.originefra.com/cdn/shop/files/luce_di_verona_weisser_hg_large.jpg?v=1742466303" alt="Luce Di Soave">
+
   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap;">
     <label id="label-lang" for="country-select" style="font-size: 18px; font-weight: 700; word-wrap: break-word; overflow-wrap: break-word;">
       Entsorgungsvorschrift gültig in:
@@ -92,19 +121,19 @@
     </select>
   </div>
 
-  <h1 id="product-title">Luce Di Soave</h1>
-  <img src="https://www.originefra.com/cdn/shop/files/luce_di_verona_weisser_hg_large.jpg?v=1742466303" alt="Luce Di Soave" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-
+  <hr>
   <h2 id="waste-title">Entsorgungsinformationen</h2>
   <div id="waste-info">
     <!-- Entsorgungsinformationen werden hier eingefügt -->
   </div>
 
+  <hr>
   <h2 id="ingredients-title">Zutaten</h2>
   <div id="ingredients-info">
     <!-- Zutateninformationen werden hier eingefügt -->
   </div>
 
+  <hr>
   <h2 id="nutrition-title">Nährwertinformationen</h2>
   <div id="nutrition-info">
     <!-- Nährwertinformationen werden hier eingefügt -->
