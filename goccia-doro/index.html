@@ -1,1 +1,459 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goccia D'Oro</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      max-width: 720px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #333;
+      margin: 0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: block;
+      margin: 0 auto 40px;
+    }
+    .waste-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .waste-icon {
+      width: 40px;
+      height: 40px;
+      margin: 0;
+    }
+    .waste-text {
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      flex-grow: 1;
+    }
+    .waste-text strong {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    #waste-title,
+    .ingredients-title,
+    .nutrition-title {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .ingredients-text,
+    .nutrition-text {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .nutrition-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      border: 1px solid #E0BD59;
+    }
+    .nutrition-table th,
+    .nutrition-table td {
+      padding: 10px;
+      border-top: 1px solid #E0BD59;
+      text-align: left;
+    }
+    .nutrition-table th {
+      background-color: #f9f9f9;
+      font-weight: bold;
+    }
+    #country-select {
+      padding: 10px 16px;
+      font-size: 16px;
+      font-weight: 700;
+      border: 2px solid #E0BD59;
+      border-radius: 8px;
+      background-color: #fffdf8;
+      color: #333;
+      width: 100%;
+      max-width: 200px;
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #E0BD59;
+      margin: 30px 0 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="product-title">Goccia D'Oro</h1>
+  <img src="https://www.originefra.com/cdn/shop/files/luce_di_verona_weisser_hg_large.jpg?v=1742466303" alt="Luce Di Soave">
 
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap;">
+    <label id="label-lang" for="country-select" style="font-size: 18px; font-weight: 700; word-wrap: break-word; overflow-wrap: break-word;">
+      Entsorgungsvorschrift gültig in:
+    </label>
+    <select id="country-select">
+      <option value="de">🇩🇪 Deutschland</option>
+      <option value="at">🇦🇹 Österreich</option>
+      <option value="ch">🇨🇭 Schweiz</option>
+      <option value="fr">🇫🇷 Frankreich</option>
+      <option value="it">🇮🇹 Italien</option>
+      <option value="nl">🇳🇱 Niederlande</option>
+      <option value="be">🇧🇪 Belgien</option>
+      <option value="pl">🇵🇱 Polen</option>
+      <option value="uk">🇬🇧 England</option>
+      <option value="es">🇪🇸 Spanien</option>
+      <option value="pt">🇵🇹 Portugal</option>
+      <option value="sk">🇸🇰 Slowakei</option>
+    </select>
+  </div>
+
+  <hr>
+  <h2 id="waste-title">Entsorgungsinformationen</h2>
+  <div id="waste-info">
+    <!-- Entsorgungsinformationen werden hier eingefügt -->
+  </div>
+
+  <hr>
+  <h2 id="ingredients-title">Zutaten</h2>
+  <div id="ingredients-info">
+    <!-- Zutateninformationen werden hier eingefügt -->
+  </div>
+
+  <hr>
+  <h2 id="nutrition-title">Nährwertinformationen</h2>
+  <div id="nutrition-info">
+    <!-- Nährwertinformationen werden hier eingefügt -->
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const wasteData = {
+        entsorgung_vorschrift_text_json: {
+          "de": "Entsorgungsvorschrift gültig in:",
+          "at": "Entsorgungsvorschrift gültig in:",
+          "ch": "Entsorgungsvorschrift gültig in:",
+          "fr": "Instructions de tri valables en :",
+          "it": "Istruzioni di smaltimento valide in:",
+          "nl": "Afvalinstructies geldig in:",
+          "be": "Afvalinstructies geldig in:",
+          "pl": "Zasady segregacji obowiązujące w:",
+          "uk": "Waste instructions valid in:",
+          "es": "Instrucciones de reciclaje válidas en:",
+          "pt": "Instruções de reciclagem válidas em:",
+          "sk": "Pokyny na recykláciu platné na:"
+        },
+        entsorgung_titel_json: {
+          "de": "Mülltrennung",
+          "at": "Mülltrennung",
+          "ch": "Mülltrennung",
+          "fr": "Tri des déchets",
+          "it": "Smistamento dei rifiuti",
+          "nl": "Afvalscheiding",
+          "be": "Afvalscheiding",
+          "pl": "Segregacja odpadów",
+          "uk": "Waste separation",
+          "es": "Separación de residuos",
+          "pt": "Separação de resíduos",
+          "sk": "Triedenie odpadu"
+        },
+        entsorgung_flasche_json: {
+          "de": ["Flasche", "Weißglas", "Grüne Tonne"],
+          "at": ["Flasche", "Weißglas", "Altglasbehälter"],
+          "ch": ["Flasche", "Weißglas", "Glassammlung"],
+          "fr": ["Bouteille", "Verre blanc", "Bac à verre"],
+          "it": ["Bottiglia", "Vetro bianco", "Raccolta vetro"],
+          "nl": ["Fles", "Wit glas", "Glasbak"],
+          "be": ["Fles", "Wit glas", "Glasbak"],
+          "pl": ["Butelka", "Szkło białe", "Pojemnik na szkło"],
+          "uk": ["Bottle", "Clear glass", "Glass bin"],
+          "es": ["Botella", "Vidrio blanco", "Contenedor de vidrio"],
+          "pt": ["Garrafa", "Vidro branco", "Ecoponto de vidro"],
+          "sk": ["Fľaša", "Biele sklo", "Kontajner na sklo"]
+        },
+        enstorgung_kapsel_json: {
+          "de": ["Kapsel", "Aluminium", "Gelber Sack"],
+          "at": ["Kapsel", "Aluminium", "Metallsammlung"],
+          "ch": ["Kapsel", "Aluminium", "Metallsammlung"],
+          "fr": ["Capsule", "Aluminium", "Bac jaune"],
+          "it": ["Capsula", "Alluminio", "Raccolta metalli"],
+          "nl": ["Capsule", "Aluminium", "PMD-zak"],
+          "be": ["Capsule", "Aluminium", "PMD-zak"],
+          "pl": ["Kapsel", "Aluminium", "Żółty pojemnik"],
+          "uk": ["Capsule", "Aluminium", "Recycling bin"],
+          "es": ["Cápsula", "Aluminio", "Contenedor amarillo"],
+          "pt": ["Cápsula", "Alumínio", "Ecoponto amarelo"],
+          "sk": ["Viečko", "Hliník", "Kovový odpad"]
+        },
+        entsorgung_korken_json: {
+          "de": ["Verschluss", "Naturkork", "Restmüll"],
+          "at": ["Verschluss", "Naturkork", "Restmüll"],
+          "ch": ["Verschluss", "Naturkork", "Hausmüll"],
+          "fr": ["Bouchon", "Liège naturel", "Ordures ménagères"],
+          "it": ["Tappo", "Sughero naturale", "Rifiuto secco"],
+          "nl": ["Sluiting", "Natuurkurk", "Restafval"],
+          "be": ["Sluiting", "Natuurkurk", "Restafval"],
+          "pl": ["Zamknięcie", "Naturalny korek", "Odpady zmieszane"],
+          "uk": ["Closure", "Natural cork", "General waste"],
+          "es": ["Tapón", "Corcho natural", "Basura general"],
+          "pt": ["Tampa", "Cortiça natural", "Lixo indiferenciado"],
+          "sk": ["Uzáver", "Prírodný korok", "Zmesový odpad"]
+        },
+        zutaten_json: {
+          "de": ["Zutaten", "Trauben, Antioxidationsmittel: <strong>Sulfite</strong>"],
+          "at": ["Zutaten", "Trauben, Antioxidationsmittel: <strong>Sulfite</strong>"],
+          "ch": ["Zutaten", "Trauben, Antioxidationsmittel: <strong>Sulfite</strong>"],
+          "fr": ["Ingrédients", "Raisins, Antioxydant: <strong>Sulfites</strong>"],
+          "it": ["Ingredienti", "Uva, Antiossidante: <strong>Solfiti</strong>"],
+          "nl": ["Ingrediënten", "Druiven, Antioxidant: <strong>Sulfieten</strong>"],
+          "be": ["Ingrediënten", "Druiven, Antioxidant: <strong>Sulfieten</strong>"],
+          "pl": ["Składniki", "Winogrona, Przeciwutleniacz: <strong>Siarczyny</strong>"],
+          "uk": ["Ingredients", "Grapes, Antioxidant: <strong>Sulfites</strong>"],
+          "es": ["Ingredientes", "Uvas, Antioxidante: <strong>Sulfitos</strong>"],
+          "pt": ["Ingredientes", "Uvas, Antioxidante: <strong>Sulfitos</strong>"],
+          "sk": ["Zloženie", "Hrozno, Antioxidant: <strong>Siričitany</strong>"]
+        },
+        naehrwerte_labels_json: {
+          "de": {
+            "title": "Nährwerttabelle",
+            "average_values": "Durchschnittliche Nährwerte",
+            "value_per_100ml": "Wert pro 100 ml",
+            "labels": {
+              "energy": "Energie (kJ/kcal)",
+              "fat": "Fett",
+              "saturated_fat": "davon gesättigte Fettsäuren",
+              "carbs": "Kohlenhydrate",
+              "sugar": "davon Zucker",
+              "protein": "Eiweiß",
+              "salt": "Salz"
+            }
+          },
+          "at": {
+            "title": "Nährwerttabelle",
+            "average_values": "Durchschnittliche Nährwerte",
+            "value_per_100ml": "Wert pro 100 ml",
+            "labels": {
+              "energy": "Energie (kJ/kcal)",
+              "fat": "Fett",
+              "saturated_fat": "davon gesättigte Fettsäuren",
+              "carbs": "Kohlenhydrate",
+              "sugar": "davon Zucker",
+              "protein": "Eiweiß",
+              "salt": "Salz"
+            }
+          },
+          "ch": {
+            "title": "Nährwerttabelle",
+            "average_values": "Durchschnittliche Nährwerte",
+            "value_per_100ml": "Wert pro 100 ml",
+            "labels": {
+              "energy": "Energie (kJ/kcal)",
+              "fat": "Fett",
+              "saturated_fat": "davon gesättigte Fettsäuren",
+              "carbs": "Kohlenhydrate",
+              "sugar": "davon Zucker",
+              "protein": "Eiweiß",
+              "salt": "Salz"
+            }
+          },
+          "fr": {
+            "title": "Tableau nutritionnel",
+            "average_values": "Valeurs nutritionnelles moyennes",
+            "value_per_100ml": "Valeur pour 100 ml",
+            "labels": {
+              "energy": "Énergie (kJ/kcal)",
+              "fat": "Lipides",
+              "saturated_fat": "dont acides gras saturés",
+              "carbs": "Glucides",
+              "sugar": "dont sucres",
+              "protein": "Protéines",
+              "salt": "Sel"
+            }
+          },
+          "it": {
+            "title": "Tabella nutrizionale",
+            "average_values": "Valori nutrizionali medi",
+            "value_per_100ml": "Valori per 100 ml",
+            "labels": {
+              "energy": "Energia (kJ/kcal)",
+              "fat": "Grassi",
+              "saturated_fat": "di cui acidi grassi saturi",
+              "carbs": "Carboidrati",
+              "sugar": "di cui zuccheri",
+              "protein": "Proteine",
+              "salt": "Sale"
+            }
+          },
+          "nl": {
+            "title": "Voedingswaardetabel",
+            "average_values": "Gemiddelde voedingswaarden",
+            "value_per_100ml": "Waarde per 100 ml",
+            "labels": {
+              "energy": "Energie (kJ/kcal)",
+              "fat": "Vet",
+              "saturated_fat": "waarvan verzadigde vetzuren",
+              "carbs": "Koolhydraten",
+              "sugar": "waarvan suikers",
+              "protein": "Eiwit",
+              "salt": "Zout"
+            }
+          },
+          "be": {
+            "title": "Voedingswaardetabel",
+            "average_values": "Gemiddelde voedingswaarden",
+            "value_per_100ml": "Waarde per 100 ml",
+            "labels": {
+              "energy": "Energie (kJ/kcal)",
+              "fat": "Vet",
+              "saturated_fat": "waarvan verzadigde vetzuren",
+              "carbs": "Koolhydraten",
+              "sugar": "waarvan suikers",
+              "protein": "Eiwit",
+              "salt": "Zout"
+            }
+          },
+          "pl": {
+            "title": "Tabela wartości odżywczych",
+            "average_values": "Średnie wartości odżywcze",
+            "value_per_100ml": "Wartość na 100 ml",
+            "labels": {
+              "energy": "Wartość energetyczna (kJ/kcal)",
+              "fat": "Tłuszcz",
+              "saturated_fat": "w tym kwasy tłuszczowe nasycone",
+              "carbs": "Węglowodany",
+              "sugar": "w tym cukry",
+              "protein": "Białko",
+              "salt": "Sól"
+            }
+          },
+          "uk": {
+            "title": "Nutrition Table",
+            "average_values": "Average Nutritional Values",
+            "value_per_100ml": "Value per 100 ml",
+            "labels": {
+              "energy": "Energy (kJ/kcal)",
+              "fat": "Fat",
+              "saturated_fat": "of which saturates",
+              "carbs": "Carbohydrates",
+              "sugar": "of which sugars",
+              "protein": "Protein",
+              "salt": "Salt"
+            }
+          },
+          "es": {
+            "title": "Tabla nutricional",
+            "average_values": "Valores nutricionales medios",
+            "value_per_100ml": "Valor por 100 ml",
+            "labels": {
+              "energy": "Energía (kJ/kcal)",
+              "fat": "Grasa",
+              "saturated_fat": "de las cuales grasas saturadas",
+              "carbs": "Hidratos de carbono",
+              "sugar": "de los cuales azúcares",
+              "protein": "Proteínas",
+              "salt": "Sal"
+            }
+          },
+          "pt": {
+            "title": "Tabela nutricional",
+            "average_values": "Valores nutricionais médios",
+            "value_per_100ml": "Valor por 100 ml",
+            "labels": {
+              "energy": "Energia (kJ/kcal)",
+              "fat": "Gordura",
+              "saturated_fat": "dos quais ácidos gordos saturados",
+              "carbs": "Hidratos de carbono",
+              "sugar": "dos quais açúcares",
+              "protein": "Proteínas",
+              "salt": "Sal"
+            }
+          },
+          "sk": {
+            "title": "Nutričná tabuľka",
+            "average_values": "Priemerné výživové hodnoty",
+            "value_per_100ml": "Hodnota na 100 ml",
+            "labels": {
+              "energy": "Energia (kJ/kcal)",
+              "fat": "Tuky",
+              "saturated_fat": "z toho nasýtené mastné kyseliny",
+              "carbs": "Sacharidy",
+              "sugar": "z toho cukry",
+              "protein": "Bielkoviny",
+              "salt": "Soľ"
+            }
+          }
+        }
+      };
+
+      const countrySelect = document.getElementById("country-select");
+
+      countrySelect.addEventListener("change", function() {
+        const lang = countrySelect.value;
+        updateContent(lang);
+      });
+
+      function updateContent(lang) {
+        document.getElementById("waste-title").textContent = wasteData.entsorgung_titel_json[lang];
+        document.getElementById("waste-info").innerHTML = `
+          <div class="waste-row">
+            <img src="https://cdn-icons-png.flaticon.com/512/684/684611.png" alt="Flasche" class="waste-icon">
+            <div class="waste-text"><strong>${wasteData.entsorgung_flasche_json[lang][0]}</strong><span>${wasteData.entsorgung_flasche_json[lang][1]}</span><span>${wasteData.entsorgung_flasche_json[lang][2]}</span></div>
+          </div>
+          <div class="waste-row">
+            <img src="https://cdn-icons-png.flaticon.com/512/11408/11408128.png" alt="Kapsel" class="waste-icon">
+            <div class="waste-text"><strong>${wasteData.enstorgung_kapsel_json[lang][0]}</strong><span>${wasteData.enstorgung_kapsel_json[lang][1]}</span><span>${wasteData.enstorgung_kapsel_json[lang][2]}</span></div>
+          </div>
+          <div class="waste-row">
+            <img src="https://cdn-icons-png.flaticon.com/512/2372/2372354.png" alt="Verschluss" class="waste-icon">
+            <div class="waste-text"><strong>${wasteData.entsorgung_korken_json[lang][0]}</strong><span>${wasteData.entsorgung_korken_json[lang][1]}</span><span>${wasteData.entsorgung_korken_json[lang][2]}</span></div>
+          </div>
+        `;
+
+        document.getElementById("ingredients-title").textContent = wasteData.zutaten_json[lang][0];
+        document.getElementById("ingredients-info").innerHTML = `
+          <div class="ingredients-text">${wasteData.zutaten_json[lang][1]}</div>
+        `;
+
+        const nutritionLabels = wasteData.naehrwerte_labels_json[lang];
+        document.getElementById("nutrition-title").textContent = nutritionLabels.title;
+        document.getElementById("nutrition-info").innerHTML = `
+          <table class="nutrition-table">
+            <thead>
+              <tr>
+                <th>${nutritionLabels.average_values}</th>
+                <th>${nutritionLabels.value_per_100ml}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>${nutritionLabels.labels.energy}</td><td>1 kJ / 1 kcal</td></tr>
+              <tr><td>${nutritionLabels.labels.fat}</td><td>1 g</td></tr>
+              <tr><td>${nutritionLabels.labels.saturated_fat}</td><td>1 g</td></tr>
+              <tr><td>${nutritionLabels.labels.carbs}</td><td>1 g</td></tr>
+              <tr><td>${nutritionLabels.labels.sugar}</td><td>1 g</td></tr>
+              <tr><td>${nutritionLabels.labels.protein}</td><td>1 g</td></tr>
+              <tr><td>${nutritionLabels.labels.salt}</td><td>1 g</td></tr>
+            </tbody>
+          </table>
+        `;
+      }
+
+      // Initiale Aktualisierung der Inhalte
+      updateContent(countrySelect.value);
+    });
+  </script>
+</body>
+</html>
