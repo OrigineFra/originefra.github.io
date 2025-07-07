@@ -5,12 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perlina D'Italia - Pecorino Terre di Chieti IGT</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Poppins', sans-serif;
       color: #333;
       max-width: 720px;
       margin: 60px auto;
       padding: 0 20px;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #333;
+      margin: 0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: block;
+      margin: 0 auto 40px;
     }
     .waste-row {
       display: flex;
@@ -21,16 +40,19 @@
     .waste-icon {
       width: 40px;
       height: 40px;
+      margin: 0;
     }
     .waste-text {
       display: flex;
       flex-direction: column;
       font-size: 14px;
+      flex-grow: 1;
     }
     .waste-text strong {
       font-weight: 600;
       margin-bottom: 2px;
     }
+    #waste-title,
     .ingredients-title,
     .nutrition-title {
       font-weight: 700;
@@ -58,37 +80,61 @@
       background-color: #f9f9f9;
       font-weight: bold;
     }
+    #country-select {
+      padding: 10px 16px;
+      font-size: 16px;
+      font-weight: 700;
+      border: 2px solid #E0BD59;
+      border-radius: 8px;
+      background-color: #fffdf8;
+      color: #333;
+      width: 100%;
+      max-width: 200px;
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #E0BD59;
+      margin: 30px 0 15px;
+    }
   </style>
 </head>
 <body>
-  <select id="country-select">
-    <option value="de">Deutsch</option>
-    <option value="at">Österreich</option>
-    <option value="ch">Schweiz</option>
-    <option value="fr">Français</option>
-    <option value="it">Italiano</option>
-    <option value="nl">Nederlands</option>
-    <option value="be">Belgique</option>
-    <option value="pl">Polski</option>
-    <option value="uk">English</option>
-    <option value="es">Español</option>
-    <option value="pt">Português</option>
-    <option value="sk">Slovenský</option>
-  </select>
-
   <h1 id="product-title">Perlina D'Italia - Pecorino Terre di Chieti IGT</h1>
-  <img src="path/to/image.jpg" alt="Perlina D'Italia - Pecorino Terre di Chieti IGT" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+  <img src="https://via.placeholder.com/300x300?text=No+Image+Available" alt="Perlina D'Italia - Pecorino Terre di Chieti IGT">
 
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap;">
+    <label id="label-lang" for="country-select" style="font-size: 18px; font-weight: 700; word-wrap: break-word; overflow-wrap: break-word;">
+      Entsorgungsvorschrift gültig in:
+    </label>
+    <select id="country-select">
+      <option value="de">🇩🇪 Deutschland</option>
+      <option value="at">🇦🇹 Österreich</option>
+      <option value="ch">🇨🇭 Schweiz</option>
+      <option value="fr">🇫🇷 Frankreich</option>
+      <option value="it">🇮🇹 Italien</option>
+      <option value="nl">🇳🇱 Niederlande</option>
+      <option value="be">🇧🇪 Belgien</option>
+      <option value="pl">🇵🇱 Polen</option>
+      <option value="uk">🇬🇧 England</option>
+      <option value="es">🇪🇸 Spanien</option>
+      <option value="pt">🇵🇹 Portugal</option>
+      <option value="sk">🇸🇰 Slowakei</option>
+    </select>
+  </div>
+
+  <hr>
   <h2 id="waste-title">Entsorgungsinformationen</h2>
   <div id="waste-info">
     <!-- Entsorgungsinformationen werden hier eingefügt -->
   </div>
 
-  <h2 id="ingredients-title">Zutaten 2024</h2>
+  <hr>
+  <h2 id="ingredients-title">Zutaten</h2>
   <div id="ingredients-info">
     <!-- Zutateninformationen werden hier eingefügt -->
   </div>
 
+  <hr>
   <h2 id="nutrition-title">Nährwertinformationen</h2>
   <div id="nutrition-info">
     <!-- Nährwertinformationen werden hier eingefügt -->
@@ -126,60 +172,60 @@
           "sk": "Triedenie odpadu"
         },
         entsorgung_flasche_json: {
-          "de": ["Flasche", "Farbloses Glas", "Durchsichtiges Glas/farblos GL70"],
-          "at": ["Flasche", "Weißglas", "Durchsichtiges Glas/farblos GL70"],
-          "ch": ["Flasche", "Weißglas", "Durchsichtiges Glas/farblos GL70"],
-          "fr": ["Bouteille", "Verre", "Verre transparent/incolore GL70"],
-          "it": ["Bottiglia", "Cassonetto grigio con coperchio verde - Raccolta vetro", "Vetro trasparente/incolore GL70"],
-          "nl": ["Fles", "Glas", "Transparant/glas helder GL70"],
-          "be": ["Bouteille", "Verre incolore", "Verre transparent/incolore GL70"],
-          "pl": ["Butelka", "Szkło bezbarwne", "Szkło transparentne/bezbarwne GL70"],
-          "uk": ["Bottle", "Glass", "Transparent/colourless glass GL70"],
-          "es": ["Botella", "Vidrio", "Vidrio transparente/incoloro GL70"],
-          "pt": ["Garrafa", "Vidro", "Vidro transparente/incolor GL70"],
-          "sk": ["Fľaša", "Sklo", "Priehľadné/nefarebné sklo GL70"]
+          "de": ["Flasche", "Weißglas", "Grüne Tonne"],
+          "at": ["Flasche", "Weißglas", "Altglasbehälter"],
+          "ch": ["Flasche", "Weißglas", "Glassammlung"],
+          "fr": ["Bouteille", "Verre blanc", "Bac à verre"],
+          "it": ["Bottiglia", "Vetro bianco", "Raccolta vetro"],
+          "nl": ["Fles", "Wit glas", "Glasbak"],
+          "be": ["Fles", "Wit glas", "Glasbak"],
+          "pl": ["Butelka", "Szkło białe", "Pojemnik na szkło"],
+          "uk": ["Bottle", "Clear glass", "Glass bin"],
+          "es": ["Botella", "Vidrio blanco", "Contenedor de vidrio"],
+          "pt": ["Garrafa", "Vidro branco", "Ecoponto de vidro"],
+          "sk": ["Fľaša", "Biele sklo", "Kontajner na sklo"]
         },
         enstorgung_kapsel_json: {
-          "de": ["Kapsel", "Leichtverpackungen (Gelber Sack)", "Aluminium/Plastik, Vorherrschaft von Aluminium C/ALU90"],
-          "at": ["Kapsel", "Metallverpackungen", "Aluminium/Plastik, Vorherrschaft von Aluminium C/ALU90"],
-          "ch": ["Kapsel", "Metallverpackungen", "Aluminium/Plastik, Vorherrschaft von Aluminium C/ALU90"],
-          "fr": ["Capsule", "Emballages et papiers", "Aluminium/Plastique, prédominance d'aluminium C/ALU90"],
-          "it": ["Capsula", "Sacco giallo trasparente - Raccolta plastica e metallo", "Alluminio/Plastica, prevalenza alluminio C/ALU90"],
-          "nl": ["Capsule", "Lichte verpakkingen", "Aluminium/Kunststof, overheersend aluminium C/ALU90"],
-          "be": ["Capsule", "Plastiques, métaux et cartons à boissons", "Aluminium/Plastique, prédominance d'aluminium C/ALU90"],
-          "pl": ["Kapsułka", "Lekkie opakowania", "Aluminium/Plastik, przewaga aluminium C/ALU90"],
-          "uk": ["Capsule", "Metals", "Aluminum/Plastic, predominance of aluminum C/ALU90"],
-          "es": ["Cápsula", "Envases ligeros", "Aluminio/Plástico, predominancia de aluminio C/ALU90"],
-          "pt": ["Cápsula", "Embalagens leves", "Alumínio/Plástico, prevalência de alumínio C/ALU90"],
-          "sk": ["Kapsula", "Konzervy", "Hliník/Plast, prevaha hliníka C/ALU90"]
+          "de": ["Kapsel", "Aluminium", "Gelber Sack"],
+          "at": ["Kapsel", "Aluminium", "Metallsammlung"],
+          "ch": ["Kapsel", "Aluminium", "Metallsammlung"],
+          "fr": ["Capsule", "Aluminium", "Bac jaune"],
+          "it": ["Capsula", "Alluminio", "Raccolta metalli"],
+          "nl": ["Capsule", "Aluminium", "PMD-zak"],
+          "be": ["Capsule", "Aluminium", "PMD-zak"],
+          "pl": ["Kapsel", "Aluminium", "Żółty pojemnik"],
+          "uk": ["Capsule", "Aluminium", "Recycling bin"],
+          "es": ["Cápsula", "Aluminio", "Contenedor amarillo"],
+          "pt": ["Cápsula", "Alumínio", "Ecoponto amarelo"],
+          "sk": ["Viečko", "Hliník", "Kovový odpad"]
         },
         entsorgung_korken_json: {
-          "de": ["Verschluss", "Leichtverpackungen (Gelber Sack)", "Polyethylen niedriger Dichte LDPE4"],
-          "at": ["Verschluss", "Leichtverpackungen", "Polyethylen niedriger Dichte LDPE4"],
-          "ch": ["Verschluss", "Leichtverpackungen", "Polyethylen niedriger Dichte LDPE4"],
-          "fr": ["Bouchon", "Emballages et papiers", "Polyéthylène à basse densité LDPE4"],
-          "it": ["Tappo", "Sacco giallo trasparente - Raccolta plastica e metallo", "Polietilene a bassa densità LDPE4"],
-          "nl": ["Dop", "Lichte verpakkingen", "Lage-dichtheid polyethyleen LDPE4"],
-          "be": ["Bouchon", "Plastiques, métaux et cartons à boissons", "Polyéthylène à basse densité LDPE4"],
-          "pl": ["Korek", "Lekkie opakowania", "Polietylen o niskiej gęstości LDPE4"],
-          "uk": ["Cap", "Plastic", "Low density polyethylene LDPE4"],
-          "es": ["Tapa", "Envases ligeros", "Polietileno de baja densidade LDPE4"],
-          "pt": ["Tampa", "Embalagens leves", "Polietileno de baixa densidade LDPE4"],
-          "sk": ["Uzáver", "Plast", "Nízkohustotný polyetylén LDPE4"]
+          "de": ["Verschluss", "Naturkork", "Restmüll"],
+          "at": ["Verschluss", "Naturkork", "Restmüll"],
+          "ch": ["Verschluss", "Naturkork", "Hausmüll"],
+          "fr": ["Bouchon", "Liège naturel", "Ordures ménagères"],
+          "it": ["Tappo", "Sughero naturale", "Rifiuto secco"],
+          "nl": ["Sluiting", "Natuurkurk", "Restafval"],
+          "be": ["Sluiting", "Natuurkurk", "Restafval"],
+          "pl": ["Zamknięcie", "Naturalny korek", "Odpady zmieszane"],
+          "uk": ["Closure", "Natural cork", "General waste"],
+          "es": ["Tapón", "Corcho natural", "Basura general"],
+          "pt": ["Tampa", "Cortiça natural", "Lixo indiferenciado"],
+          "sk": ["Uzáver", "Prírodný korok", "Zmesový odpad"]
         },
         zutaten_json: {
-          "de": ["Zutaten 2024", "Bio-Trauben, Säureregulator (Zitronensäure), Antioxidationsmittel (L-Ascorbinsäure), Konservierungsstoff (Sulfite), Stabilisatoren (Metaweinsäure, Zitronensäure), Unter Schutzatmosphäre abgefüllt, Hefen, Konzentrierter Traubenmost / Biologischer rektifizierter konzentrierter Traubenmost"],
-          "at": ["Zutaten 2024", "Bio-Trauben, Säureregulator (Zitronensäure), Antioxidationsmittel (L-Ascorbinsäure), Konservierungsstoff (Sulfite), Stabilisatoren (Metaweinsäure, Zitronensäure), Unter Schutzatmosphäre abgefüllt, Hefen, Konzentrierter Traubenmost / Biologischer rektifizierter konzentrierter Traubenmost"],
-          "ch": ["Zutaten 2024", "Bio-Trauben, Säureregulator (Zitronensäure), Antioxidationsmittel (L-Ascorbinsäure), Konservierungsstoff (Sulfite), Stabilisatoren (Metaweinsäure, Zitronensäure), Unter Schutzatmosphäre abgefüllt, Hefen, Konzentrierter Traubenmost / Biologischer rektifizierter konzentrierter Traubenmost"],
-          "fr": ["Ingrédients 2024", "Raisins bio, régulateur d'acidité (acide citrique), antioxydant (acide L-ascorbique), conservateur (sulfites), stabilisants (acide métatartrique, acide citrique), conditionné sous atmosphère protectrice, levures, moût de raisin concentré / moût de raisin concentré rectifié biologique"],
-          "it": ["Ingredienti 2024", "Uva biologica, regolatore di acidità (acido citrico), antiossidante (acido L-ascorbico), conservante (solfiti), stabilizzanti (acido metatartarico, acido citrico), confezionato in atmosfera protettiva, lieviti, mosto d'uva concentrato / mosto d'uva concentrato rettificato biologico"],
-          "nl": ["Ingrediënten 2024", "Biologische druiven, zuurteregelaar (citroenzuur), antioxidant (L-ascorbinezuur), conserveermiddel (sulfieten), stabilisatoren (metawijnsteenzuur, citroenzuur), verpakt onder beschermende atmosfeer, gisten, geconcentreerd druivensap / biologisch gerectificeerd geconcentreerd druivensap"],
-          "be": ["Ingrediënten 2024", "Biologische druiven, zuurteregelaar (citroenzuur), antioxidant (L-ascorbinezuur), conserveermiddel (sulfieten), stabilisatoren (metawijnsteenzuur, citroenzuur), verpakt onder beschermende atmosfeer, gisten, geconcentreerd druivensap / biologisch gerectificeerd geconcentreerd druivensap"],
-          "pl": ["Składniki 2024", "Winogrona ekologiczne, regulator kwasowości (kwas cytrynowy), przeciwutleniacz (kwas L-askorbinowy), konserwant (siarczyny), stabilizatory (kwas metawinianowy, kwas cytrynowy), pakowane w atmosferze ochronnej, drożdże, skoncentrowany moszcz winogronowy / biologiczny rektyfikowany skoncentrowany moszcz winogronowy"],
-          "uk": ["Ingredients 2024", "Organic grapes, acidity regulator (citric acid), antioxidant (L-ascorbic acid), preservative (sulfites), stabilizers (metatartaric acid, citric acid), packed under protective atmosphere, yeasts, concentrated grape must / biologically rectified concentrated grape must"],
-          "es": ["Ingredientes 2024", "Uvas ecológicas, regulador de acidez (ácido cítrico), antioxidante (ácido L-ascórbico), conservante (sulfitos), estabilizantes (ácido metatartárico, ácido cítrico), envasado en atmósfera protectora, levaduras, mosto de uva concentrado / mosto de uva concentrado rectificado biológico"],
-          "pt": ["Ingredientes 2024", "Uvas biológicas, regulador de acidez (ácido cítrico), antioxidante (ácido L-ascórbico), conservante (sulfitos), estabilizadores (ácido metatartárico, ácido cítrico), embalado em atmosfera protetora, leveduras, mosto de uva concentrado / mosto de uva concentrado retificado biológico"],
-          "sk": ["Zloženie 2024", "Bio hrozno, regulátor kyslosti (kyselina citrónová), antioxidant (kyselina L-askorbová), konzervačná látka (siričitany), stabilizátory (kyselina metavínna, kyselina citrónová), balené v ochrannej atmosfére, kvasinky, koncentrovaný hroznový mušt / biologicky rektifikovaný koncentrovaný hroznový mušt"]
+          "de": ["Zutaten", "Trauben, Antioxidationsmittel: <strong>Sulfite</strong>"],
+          "at": ["Zutaten", "Trauben, Antioxidationsmittel: <strong>Sulfite</strong>"],
+          "ch": ["Zutaten", "Trauben, Antioxidationsmittel: <strong>Sulfite</strong>"],
+          "fr": ["Ingrédients", "Raisins, Antioxydant: <strong>Sulfites</strong>"],
+          "it": ["Ingredienti", "Uva, Antiossidante: <strong>Solfiti</strong>"],
+          "nl": ["Ingrediënten", "Druiven, Antioxidant: <strong>Sulfieten</strong>"],
+          "be": ["Ingrediënten", "Druiven, Antioxidant: <strong>Sulfieten</strong>"],
+          "pl": ["Składniki", "Winogrona, Przeciwutleniacz: <strong>Siarczyny</strong>"],
+          "uk": ["Ingredients", "Grapes, Antioxidant: <strong>Sulfites</strong>"],
+          "es": ["Ingredientes", "Uvas, Antioxidante: <strong>Sulfitos</strong>"],
+          "pt": ["Ingredientes", "Uvas, Antioxidante: <strong>Sulfitos</strong>"],
+          "sk": ["Zloženie", "Hrozno, Antioxidant: <strong>Siričitany</strong>"]
         },
         naehrwerte_labels_json: {
           "de": {
@@ -193,9 +239,7 @@
               "carbs": "Kohlenhydrate",
               "sugar": "davon Zucker",
               "protein": "Eiweiß",
-              "salt": "Salz",
-              "alcohol": "Alkoholgehalt",
-              "sulfites": "enthält Sulfite"
+              "salt": "Salz"
             }
           },
           "at": {
@@ -209,9 +253,7 @@
               "carbs": "Kohlenhydrate",
               "sugar": "davon Zucker",
               "protein": "Eiweiß",
-              "salt": "Salz",
-              "alcohol": "Alkoholgehalt",
-              "sulfites": "enthält Sulfite"
+              "salt": "Salz"
             }
           },
           "ch": {
@@ -225,9 +267,7 @@
               "carbs": "Kohlenhydrate",
               "sugar": "davon Zucker",
               "protein": "Eiweiß",
-              "salt": "Salz",
-              "alcohol": "Alkoholgehalt",
-              "sulfites": "enthält Sulfite"
+              "salt": "Salz"
             }
           },
           "fr": {
@@ -241,9 +281,7 @@
               "carbs": "Glucides",
               "sugar": "dont sucres",
               "protein": "Protéines",
-              "salt": "Sel",
-              "alcohol": "Teneur en alcool",
-              "sulfites": "contient des sulfites"
+              "salt": "Sel"
             }
           },
           "it": {
@@ -257,9 +295,7 @@
               "carbs": "Carboidrati",
               "sugar": "di cui zuccheri",
               "protein": "Proteine",
-              "salt": "Sale",
-              "alcohol": "Gradazione alcolica",
-              "sulfites": "contiene solfiti"
+              "salt": "Sale"
             }
           },
           "nl": {
@@ -273,9 +309,7 @@
               "carbs": "Koolhydraten",
               "sugar": "waarvan suikers",
               "protein": "Eiwit",
-              "salt": "Zout",
-              "alcohol": "Alcoholgehalte",
-              "sulfites": "bevat sulfieten"
+              "salt": "Zout"
             }
           },
           "be": {
@@ -289,9 +323,7 @@
               "carbs": "Koolhydraten",
               "sugar": "waarvan suikers",
               "protein": "Eiwit",
-              "salt": "Zout",
-              "alcohol": "Alcoholgehalte",
-              "sulfites": "bevat sulfieten"
+              "salt": "Zout"
             }
           },
           "pl": {
@@ -305,9 +337,7 @@
               "carbs": "Węglowodany",
               "sugar": "w tym cukry",
               "protein": "Białko",
-              "salt": "Sól",
-              "alcohol": "Zawartość alkoholu",
-              "sulfites": "zawiera siarczyny"
+              "salt": "Sól"
             }
           },
           "uk": {
@@ -321,9 +351,7 @@
               "carbs": "Carbohydrates",
               "sugar": "of which sugars",
               "protein": "Protein",
-              "salt": "Salt",
-              "alcohol": "Alcohol content",
-              "sulfites": "contains sulfites"
+              "salt": "Salt"
             }
           },
           "es": {
@@ -337,9 +365,7 @@
               "carbs": "Hidratos de carbono",
               "sugar": "de los cuales azúcares",
               "protein": "Proteínas",
-              "salt": "Sal",
-              "alcohol": "Contenido alcohólico",
-              "sulfites": "contiene sulfitos"
+              "salt": "Sal"
             }
           },
           "pt": {
@@ -353,9 +379,7 @@
               "carbs": "Hidratos de carbono",
               "sugar": "dos quais açúcares",
               "protein": "Proteínas",
-              "salt": "Sal",
-              "alcohol": "Teor alcoólico",
-              "sulfites": "contém sulfitos"
+              "salt": "Sal"
             }
           },
           "sk": {
@@ -369,9 +393,7 @@
               "carbs": "Sacharidy",
               "sugar": "z toho cukry",
               "protein": "Bielkoviny",
-              "salt": "Soľ",
-              "alcohol": "Obsah alkoholu",
-              "sulfites": "obsahuje siričitany"
+              "salt": "Soľ"
             }
           }
         }
@@ -402,7 +424,9 @@
         `;
 
         document.getElementById("ingredients-title").textContent = wasteData.zutaten_json[lang][0];
-        document.getElementById("ingredients-info").innerHTML = `<div class="ingredients-text">${wasteData.zutaten_json[lang][1]}</div>`;
+        document.getElementById("ingredients-info").innerHTML = `
+          <div class="ingredients-text">${wasteData.zutaten_json[lang][1]}</div>
+        `;
 
         const nutritionLabels = wasteData.naehrwerte_labels_json[lang];
         document.getElementById("nutrition-title").textContent = nutritionLabels.title;
@@ -415,15 +439,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>${nutritionLabels.labels.energy}</td><td>321 kJ / 77 kcal</td></tr>
-              <tr><td>${nutritionLabels.labels.fat}</td><td>0 g</td></tr>
-              <tr><td>${nutritionLabels.labels.saturated_fat}</td><td>0 g</td></tr>
+              <tr><td>${nutritionLabels.labels.energy}</td><td>1 kJ / 1 kcal</td></tr>
+              <tr><td>${nutritionLabels.labels.fat}</td><td>1 g</td></tr>
+              <tr><td>${nutritionLabels.labels.saturated_fat}</td><td>1 g</td></tr>
               <tr><td>${nutritionLabels.labels.carbs}</td><td>1 g</td></tr>
-              <tr><td>${nutritionLabels.labels.sugar}</td><td>0.2 g</td></tr>
-              <tr><td>${nutritionLabels.labels.protein}</td><td>&lt;0.10 g</td></tr>
-              <tr><td>${nutritionLabels.labels.salt}</td><td>&lt;0.05 g</td></tr>
-              <tr><td>${nutritionLabels.labels.alcohol}</td><td>13,5 %</td></tr>
-              <tr><td>${nutritionLabels.labels.sulfites}</td><td></td></tr>
+              <tr><td>${nutritionLabels.labels.sugar}</td><td>1 g</td></tr>
+              <tr><td>${nutritionLabels.labels.protein}</td><td>1 g</td></tr>
+              <tr><td>${nutritionLabels.labels.salt}</td><td>1 g</td></tr>
             </tbody>
           </table>
         `;
