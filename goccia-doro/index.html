@@ -408,6 +408,7 @@
 
       function updateContent(lang) {
         document.getElementById("waste-title").textContent = wasteData.entsorgung_titel_json[lang];
+        document.getElementById("label-lang").textContent = wasteData.entsorgung_vorschrift_text_json[lang];
         document.getElementById("waste-info").innerHTML = `
           <div class="waste-row">
             <img src="https://cdn-icons-png.flaticon.com/512/684/684611.png" alt="Flasche" class="waste-icon">
